@@ -1,13 +1,30 @@
 {
   "api": {
-    "awsamplifyappsyncblo": {
-      "dependsOn": [],
+    "blogappcourse": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "blogappcourse8519929e"
+        }
+      ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authblogappcourse8519929e"
+              }
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2024-07-09T12:55:05.780Z",
+              "apiKeyExpirationDays": 365,
+              "description": "public api key"
             },
             "authenticationType": "API_KEY"
           }
@@ -18,7 +35,7 @@
     }
   },
   "auth": {
-    "awsamplifyappsyncbloaaee650c": {
+    "blogappcourse8519929e": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
