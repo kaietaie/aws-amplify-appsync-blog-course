@@ -1,7 +1,7 @@
-import { listPosts } from "@/graphql/queries";
-import { API } from "aws-amplify";
+import { listPosts, getPost, postsByUsername } from "@/graphql/queries";
+import { API, Auth } from "aws-amplify";
 
-export default async function getPosts() {
+export async function getPosts() {
  try {
    const postData = await API.graphql({
      query: listPosts,
@@ -13,3 +13,31 @@ export default async function getPosts() {
   console.dir(error.message)
  }
 }
+
+export async function getOnePost(id) {
+  try {
+    const postData = await API.graphql({
+      query: getPost,
+      variables: { id },
+    });
+    return postData.data.getPost
+   
+  } catch (error) {
+   console.dir(error)
+   console.dir(error.message)
+  }
+ }
+
+ export async function getPostsByUsername(username) {
+  try {
+    const postData = await API.graphql({
+      query: postsByUsername,
+      variables: { username }
+    });
+    return postData.data.postsByUsername.items
+   
+  } catch (error) {
+   console.dir(error)
+   console.dir(error.message)
+  }
+ }

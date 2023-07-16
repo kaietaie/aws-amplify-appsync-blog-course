@@ -9,14 +9,14 @@ import "easymde/dist/easymde.min.css";
 import { API } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import "../../../configureAmplify";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const initialState = { title: "", content: "" };
 
 function CreatePost() {
   const [post, setPost] = useState(initialState);
   const { title, content } = post;
-  // const router = useRouter()
+  const router = useRouter()
 
   function onChange(e) {
     setPost(() => ({
@@ -27,21 +27,20 @@ function CreatePost() {
 
   async function createNewPost({  signOut, user }) {
     if (!title || !content) return;
-
     const id = uuid();
     post.id = id;
-
+    console.dir(post)
     await API.graphql({
       query: createPost,
       variables: { input: post },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     });
+    router.push(`/post/${id}`)
   }
 
   return (
     <div>
       <h1 className="text-3xl font-bold">Create post</h1>
-
       <input
         onChange={onChange}
         name="title"
